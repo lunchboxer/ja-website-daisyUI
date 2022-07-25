@@ -55,7 +55,7 @@
 <h2>Server Endpoint</h2>
 <p>Default: {endpoint}</p>
 <p>
-  <button class="btn-secondary btn" on:click={useDefaultEndpoint}>
+  <button class="btn-secondary btn btn-outline" on:click={useDefaultEndpoint}>
     Use default
   </button>
 </p>
@@ -69,10 +69,10 @@
   >
     <Input bind:value={customEndpoint} label="Endpoint" {error} required />
     <p>
-      <button type="reset" class="btn btn-error btn-outline"> reset </button>
-      <button type="submit" class="btn btn-success btn-outline">
-        Save custom endpoint
-      </button>
+      <button type="reset" class="btn btn-error btn-outline">reset</button>
+      <button type="submit" class="btn btn-success btn-outline"
+        >Save endpoint</button
+      >
     </p>
   </form>
 {/if}

@@ -17,7 +17,7 @@
 {#if $schoolYears?.all?.length > 0}
   <div class="form-control w-full max-w-xs">
     <label class="label" for="schoolYearSelect">
-      <span class="label-text">School Year</span>
+      <span class="label-text">Active School Year</span>
       {#if errors}
         <span class="label-text error-text">
           {errors}

@@ -1,10 +1,10 @@
-<a href="/" class="btn btn-ghost text-primary normal-case text-xl">
+<a href="/" class="btn btn-ghost normal-case text-l">
   <svg
     width="20px"
     height="20px"
     viewBox="0 0 20 20"
     version="1.1"
-    class="inline-block w-5 h-5 stroke-current mr-2"
+    class="inline-block w-5 h-5 stroke-current mr-1"
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
   >
