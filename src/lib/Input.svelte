@@ -9,6 +9,8 @@
   export let maxlength
   export let type = 'text'
   export let description = ''
+  export let min
+  export let max
   let show = false
 
   $: name = label.replace(/\W+(.)/g, (match, chr) => chr.toUpperCase())
@@ -36,6 +38,23 @@
       <span class="lable-text error-text">{error}</span>
     {/if}
   </label>
+
+  {#if type === 'date'}
+    <input
+      bind:this={input}
+      bind:value
+      class="input input-bordered"
+      class:input-error={error}
+      type="date"
+      {required}
+      {name}
+      {min}
+      {max}
+      aria-describedby={descriptionId}
+      on:input={checkValidity}
+      on:invalid|preventDefault={checkValidity}
+    />
+  {/if}
   {#if type === 'text'}
     <input
       bind:this={input}
@@ -86,9 +105,9 @@
 
   {#if description}
     <label class="label" for={name}>
-      <span class="label-text-alt help-text" id={descriptionId}
-        >{description}</span
-      >
+      <span class="label-text-alt help-text" id={descriptionId}>
+        {description}
+      </span>
     </label>
   {/if}
 </div>

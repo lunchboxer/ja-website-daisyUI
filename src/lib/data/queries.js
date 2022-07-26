@@ -1,3 +1,5 @@
+import { AllSchoolYearInfo } from './fragments'
+
 export const GETSCHOOL = /* GraphQL */ `
   {
     school {
@@ -10,15 +12,17 @@ export const GETSCHOOL = /* GraphQL */ `
 export const GET_SCHOOL_YEARS = /* GraphQL */ `
   {
     schoolYears {
-      id
-      name
-      startDate
-      endDate
-      groups {
-        id
-      }
-      createdAt
-      updatedAt
+      ...AllSchoolYearInfo
     }
   }
+  ${AllSchoolYearInfo}
+`
+
+export const GET_SCHOOL_YEAR = /* GraphQL */ `
+  query SchoolYear($id: ID!) {
+    schoolYear(id: $id) {
+      ...AllSchoolYearInfo
+    }
+  }
+  ${AllSchoolYearInfo}
 `

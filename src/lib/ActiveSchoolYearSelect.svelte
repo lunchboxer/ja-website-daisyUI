@@ -2,7 +2,7 @@
   import { schoolYears } from '$lib/data/schoolYears'
   let errors = ''
 
-  export let selected = '0'
+  export let selected = ''
 
   const selectActive = () => {
     if (!selected) return
@@ -30,7 +30,7 @@
       on:change={selectActive}
       class="select select-bordered w-full max-w-xs"
     >
-      <option disabled selected value="0">
+      <option disabled selected value="">
         Select a school year to work on
       </option>
       {#each $schoolYears.all as schoolYear}

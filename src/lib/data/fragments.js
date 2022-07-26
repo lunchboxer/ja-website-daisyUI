@@ -14,3 +14,18 @@ export const AllUserInfo = /* GraphQL */ `
     updatedAt
   }
 `
+
+export const AllSchoolYearInfo = /* GraphQL */ `
+  fragment AllSchoolYearInfo on SchoolYear {
+    id
+    name
+    startDate
+    endDate
+    groups {
+      id
+      name
+    }
+    createdAt
+    updatedAt
+  }
+`

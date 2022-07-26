@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store'
 import { request } from './fetch-client'
 import { GETSCHOOL } from './queries'
-import { EDIT_SCHOOL } from './mutations'
+import { UPDATE_SCHOOL } from './mutations'
 
 const getSchoolFromStorage = () => {
   const coldSchool =
@@ -24,7 +24,7 @@ const createSchoolStore = () => {
       set({ ...school })
     },
     edit: async variables => {
-      const response = await request(EDIT_SCHOOL, variables)
+      const response = await request(UPDATE_SCHOOL, variables)
       typeof localStorage !== 'undefined' &&
         localStorage.setItem('school', JSON.stringify(response.editSchool))
       const school = response.editSchool
