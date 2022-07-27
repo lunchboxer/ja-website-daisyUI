@@ -24,5 +24,7 @@
         {/if}
       </a>
     </li>
+    <li class="m-1"><a href="/groups">Groups</a></li>
+    <li class="m-1"><a href="/students">Students</a></li>
   </ul>
 </div>

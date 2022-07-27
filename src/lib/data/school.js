@@ -1,7 +1,6 @@
 import { writable } from 'svelte/store'
 import { request } from './fetch-client'
-import { GETSCHOOL } from './queries'
-import { UPDATE_SCHOOL } from './mutations'
+import { SCHOOL, UPDATE_SCHOOL } from './queries.graphql'
 
 const getSchoolFromStorage = () => {
   const coldSchool =
@@ -11,13 +10,13 @@ const getSchoolFromStorage = () => {
 }
 
 const createSchoolStore = () => {
-  // pull token and user from localStorage if it's there
+  // pull school info from localStorage if it's there
   const school = getSchoolFromStorage()
   const { subscribe, set } = writable({ ...school })
   return {
     subscribe,
     get: async () => {
-      const response = await request(GETSCHOOL)
+      const response = await request(SCHOOL)
       typeof localStorage !== 'undefined' &&
         localStorage.setItem('school', JSON.stringify(response.school))
       const school = response.school
@@ -26,8 +25,8 @@ const createSchoolStore = () => {
     edit: async variables => {
       const response = await request(UPDATE_SCHOOL, variables)
       typeof localStorage !== 'undefined' &&
-        localStorage.setItem('school', JSON.stringify(response.editSchool))
-      const school = response.editSchool
+        localStorage.setItem('school', JSON.stringify(response.updateSchool))
+      const school = response.updateSchool
       set({ ...school })
     },
   }

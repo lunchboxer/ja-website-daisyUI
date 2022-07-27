@@ -1,0 +1,112 @@
+query School {
+  school {
+    name
+    address
+  }
+}
+
+query SchoolYears {
+  schoolYears {
+    ...AllSchoolYearInfo
+  }
+}
+
+query SchoolYear($id: ID!) {
+  schoolYear(id: $id) {
+    ...AllSchoolYearInfo
+  }
+}
+
+mutation Login($username: String!, $password: String!) {
+  login(username: $username, password: $password) {
+    token
+    user {
+      ...AllUserInfo
+    }
+  }
+}
+
+mutation CreateUser(
+  $username: String!
+  $name: String
+  $email: String
+  $password: String!
+) {
+  createUser(
+    username: $username
+    name: $name
+    email: $email
+    password: $password
+  ) {
+    token
+    user {
+      ...AllUserInfo
+    }
+  }
+}
+
+mutation UpdateSchool($name: String, $address: String) {
+  updateSchool(name: $name, address: $address) {
+    name
+    address
+  }
+}
+
+mutation UpdateSchoolYear(
+  $id: ID!
+  $name: String!
+  $startDate: String!
+  $endDate: String!
+) {
+  updateSchoolYear(
+    id: $id
+    name: $name
+    startDate: $startDate
+    endDate: $endDate
+  ) {
+    ...AllSchoolYearInfo
+  }
+}
+
+mutation DeleteSchoolYear($id: ID!) {
+  deleteSchoolYear(id: $id) {
+    id
+  }
+}
+
+mutation CreateSchoolYear(
+  $name: String!
+  $startDate: String!
+  $endDate: String!
+) {
+  createSchoolYear(name: $name, startDate: $startDate, endDate: $endDate) {
+    ...AllSchoolYearInfo
+  }
+}
+
+fragment AllUserInfo on User {
+  id
+  name
+  username
+  email
+  isVerified
+  role
+  groups {
+    id
+    name
+  }
+  createdAt
+  updatedAt
+}
+fragment AllSchoolYearInfo on SchoolYear {
+  id
+  name
+  startDate
+  endDate
+  groups {
+    id
+    name
+  }
+  createdAt
+  updatedAt
+}

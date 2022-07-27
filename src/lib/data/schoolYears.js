@@ -1,11 +1,12 @@
 import { writable } from 'svelte/store'
 import { request } from './fetch-client'
-import { GET_SCHOOL_YEARS, GET_SCHOOL_YEAR } from './queries'
 import {
+  SCHOOL_YEAR,
+  SCHOOL_YEARS,
   UPDATE_SCHOOL_YEAR,
   DELETE_SCHOOL_YEAR,
   CREATE_SCHOOL_YEAR,
-} from './mutations'
+} from './queries.graphql'
 import { browser } from '$app/env'
 
 const getSchoolYearsFromStorage = () => {
@@ -50,11 +51,11 @@ const updateAll = (schoolYears, all) => {
 function createSchoolYearsStore() {
   // pull token and user from localStorage if it's there
   const schoolYears = getSchoolYearsFromStorage()
-  const { subscribe, update } = writable(schoolYears)
+  const { subscribe, update } = writable({ ...schoolYears })
   return {
     subscribe,
     setActive: schoolyearId =>
-      update(schoolyears => {
+      update(schoolYears => {
         if (schoolYears && schoolYears.all) {
           const found = schoolYears.all.find(year => {
             return year.id === schoolyearId
@@ -67,7 +68,7 @@ function createSchoolYearsStore() {
       }),
     get: async id => {
       if (id) {
-        const response = await request(GET_SCHOOL_YEAR, { id })
+        const response = await request(SCHOOL_YEAR, { id })
         if (response.schoolYear === null) {
           throw new Error('School Year not found')
         }
@@ -79,7 +80,7 @@ function createSchoolYearsStore() {
         })
         return response.schoolYear
       }
-      const response = await request(GET_SCHOOL_YEARS)
+      const response = await request(SCHOOL_YEARS)
       update(schoolYears => updateAll(schoolYears, response.schoolYears))
     },
     patch: async schoolYear => {
@@ -95,8 +96,7 @@ function createSchoolYearsStore() {
       })
     },
     remove: async id => {
-      const response = await request(DELETE_SCHOOL_YEAR, { id })
-      console.log(response)
+      await request(DELETE_SCHOOL_YEAR, { id })
       update(schoolYears => {
         const otherYears = schoolYears.all.filter(year => year.id !== id)
         return updateAll(schoolYears, otherYears)
@@ -104,7 +104,6 @@ function createSchoolYearsStore() {
     },
     create: async variables => {
       const response = await request(CREATE_SCHOOL_YEAR, variables)
-      console.log(response)
       update(schoolYears => {
         return updateAll(schoolYears, [
           ...schoolYears.all,

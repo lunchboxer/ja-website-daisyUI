@@ -3,11 +3,13 @@
   let errors = ''
 
   export let selected = ''
+  // in case the value passed in is null or undefined
+  let realSelect = selected || ''
 
   const selectActive = () => {
-    if (!selected) return
+    if (!realSelect) return
     try {
-      schoolYears.setActive(selected)
+      schoolYears.setActive(realSelect)
     } catch (error) {
       errors = error
     }
@@ -26,13 +28,11 @@
     </label>
     <select
       name="schoolYearSelect"
-      bind:value={selected}
+      bind:value={realSelect}
       on:change={selectActive}
       class="select select-bordered w-full max-w-xs"
     >
-      <option disabled selected value="">
-        Select a school year to work on
-      </option>
+      <option disabled value=""> Select a school year to work on </option>
       {#each $schoolYears.all as schoolYear}
         <option value={schoolYear.id}>{schoolYear.name}</option>
       {/each}

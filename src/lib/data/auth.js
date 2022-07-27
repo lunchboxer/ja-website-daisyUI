@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store'
 import { request } from './fetch-client'
-import { LOGIN, CREATE_USER } from './mutations'
+import { LOGIN, CREATE_USER } from './queries.graphql'
 
 const getAuthFromStorage = () => {
   const coldAuth =

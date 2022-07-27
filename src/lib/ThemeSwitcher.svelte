@@ -1,7 +1,18 @@
-<div class="mb-8">
-  <select data-choose-theme class="select select-bordered ">
-    <option disabled="disabled" selected="selected">Choose a theme</option>
-    <option value="dracula">Dark</option>
-    <option value="light">Light</option>
-  </select>
+<script>
+  import SunIcon from '$lib/icons/SunIcon.svelte'
+  import MoonIcon from '$lib/icons/MoonIcon.svelte'
+</script>
+
+<h3>Color theme</h3>
+<div class="btn-group">
+  <button class="btn gap-2" data-set-theme="light" data-act-class="btn-active">
+    <SunIcon />light
+  </button>
+  <button
+    class="btn gap-2"
+    data-set-theme="dracula"
+    data-act-class="btn-active"
+  >
+    <MoonIcon />dark
+  </button>
 </div>
