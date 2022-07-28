@@ -1,6 +1,4 @@
 <script>
-  import { notifications } from './data'
-
   export let message
 
   $: text = !message || typeof message === 'string' ? message : message.text

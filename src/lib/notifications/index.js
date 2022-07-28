@@ -1,4 +1,2 @@
-import { notifications } from './data'
-import NotificationList from './NotificationList.svelte'
-
-export { notifications, NotificationList }
+export { notifications } from './data'
+export { default as NotificationList } from './NotificationList.svelte'

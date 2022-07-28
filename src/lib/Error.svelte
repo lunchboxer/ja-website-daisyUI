@@ -6,8 +6,8 @@
     return Array.isArray(errors)
       ? errors.map(error => error.message).join('\n')
       : !errors.message
-      ? errors
-      : errors.message
+          ? errors
+          : errors.message
   }
 </script>
 

@@ -5,7 +5,11 @@ import path from 'node:path'
 import 'dotenv/config'
 
 const endpoint = process.env.VITE_DEV_ENDPOINT
-const output = './schema.graphql'
+const readableOutput = './schema.graphql'
+const jsonOutput = './schema.json'
+
+const readableOutputPath = path.resolve(readableOutput)
+const jsonOutputPath = path.resolve(jsonOutput)
 
 function fetchGraphQLSchema(url) {
   return fetch(url, {
@@ -23,14 +27,15 @@ function fetchGraphQLSchema(url) {
       return response.json()
     })
     .then(schemaJSON => {
-      const schema = printSchema(buildClientSchema(schemaJSON.data))
-      // const schema = JSON.stringify(schemaJSON, undefined, 2)
-      console.log(`Writing output to path ${outputPath}`)
-      fs.writeFileSync(outputPath, schema)
+      const readableSchema = printSchema(buildClientSchema(schemaJSON.data))
+      const jsonSchema = JSON.stringify(schemaJSON, undefined, 2)
+      console.log(`Writing readable output to path ${readableOutputPath}`)
+      fs.writeFileSync(readableOutputPath, readableSchema)
+      console.log(`Writing json output to path ${jsonOutputPath}`)
+      fs.writeFileSync(jsonOutputPath, jsonSchema)
+      console.log('done. happy hacking!')
     })
 }
-
-const outputPath = path.resolve(output)
 
 console.log(`Fetching schema from ${endpoint}...`)
 

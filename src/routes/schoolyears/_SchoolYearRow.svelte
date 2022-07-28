@@ -1,5 +1,4 @@
 <script>
-  import { schoolYears } from '$lib/data/schoolYears'
   import EditIcon from '$lib/icons/EditIcon.svelte'
   export let schoolYear
 
